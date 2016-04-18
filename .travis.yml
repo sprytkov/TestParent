@@ -1,0 +1,14 @@
+language: objective-c
+osx_image: xcode7.3
+branches:
+  only:
+    - master
+before_install:
+  - . ./scripts/config.sh
+before_script:
+  - ./scripts/update-bundle.sh
+script:
+  - xctool -project TestParent.xcodeproj -scheme TestParent -sdk iphonesimulator -configuration Debug build
+after_success:
+  - ./scripts/push_tag.sh
+#  - ./scripts/trigger_build.sh
